@@ -13,10 +13,14 @@ class MahasiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        $mahasiswas = Mahasiswa::paginate(5); // Mengambil semua isi tabel
+        $cari = $request->get('cari');
+        if ($cari) {
+            $mahasiswas = Mahasiswa::where("Nama", "LIKE", "%$cari%")->paginate(5);
+        } else {
+            $mahasiswas = Mahasiswa::paginate(5);
+        }
         $posts = Mahasiswa::orderBy('Nim', 'desc')->paginate(6);
         return view('mahasiswas.index', compact('mahasiswas'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
