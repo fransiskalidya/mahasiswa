@@ -29,19 +29,12 @@
                         <label for="Nama">Nama</label>
                         <input type="Nama" name="Nama" class="form-control" id="Nama" aria-describedby="Nama" >
                     </div>
-                    <div class="form-group">
-                        <label for="Kelas">Kelas</label>
-                        <select name="Kelas" class="form-control">
-                        @foreach($kelas as $kls)
-                            <option value="{{$kls->id}}">{{$kls->nama_kelas}}</option>
-                        @endforeach
-                        </select>
-                    </div>
+
                     <div class="form-group">
                         <label for="Jurusan">Jurusan</label>
                         <input type="Jurusan" name="Jurusan" class="form-control" id="Jurusan" aria-describedby="Jurusan" >
                     </div>
-                    {{-- <div class="form-group">
+                    <div class="form-group">
                         <label for="No_Handphone">No_Handphone</label>
                         <input type="No_Handphone" name="No_Handphone" class="form-control" id="No_Handphone" aria-describedby="No_Handphone" >
                     </div>
@@ -52,7 +45,15 @@
                     <div class="form-group">
                         <label for="Tanggal_Lahir">Tanggal_lahir</label>
                         <input type="Tanggal_Lahir" name="Tanggal_Lahir" class="form-control" id="Tanggal_Lahir" aria-describedby="Tanggal_Lahir" >
-                    </div> --}}
+                    </div>
+                    <div class="form-group">
+                        <label for="Kelas">Kelas</label>
+                        <select name="kelas_id" class="form-control">
+                        @foreach($kelas as $kls)
+                            <option value="{{$kls->id}}">{{$kls->nama_kelas}}</option>
+                        @endforeach
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

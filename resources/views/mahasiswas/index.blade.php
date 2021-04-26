@@ -32,20 +32,20 @@
             <th>Nama</th>
             <th>Kelas</th>
             <th>Jurusan</th>
-            {{-- <th>No_Handphone</th>
             <th>Email</th>
-            <th>Tanggal Lahir</th> --}}
+            <th>Tanggal Lahir</th>
+            <th>No_Handphone</th>
             <th width="280px">Action</th>
         </tr>
-        @foreach ($mahasiswas as $Mahasiswa)
+        @foreach ($paginate as $Mahasiswa)
         <tr>
             <td>{{ $Mahasiswa->Nim }}</td>
             <td>{{ $Mahasiswa->Nama }}</td>
             <td>{{ $Mahasiswa->kelas->nama_kelas }}</td>
             <td>{{ $Mahasiswa->Jurusan }}</td>
-            {{-- <td>{{ $Mahasiswa->No_Handphone }}</td>
             <td>{{ $Mahasiswa->Email }}</td>
-            <td>{{ $Mahasiswa->Tanggal_Lahir }}</td> --}}
+            <td>{{ $Mahasiswa->Tanggal_Lahir }}</td>
+            <td>{{ $Mahasiswa->No_Handphone }}</td>
             <td>
                 <form action="{{ route('mahasiswas.destroy',$Mahasiswa->Nim) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('mahasiswas.show',$Mahasiswa->Nim) }}">Show</a>
@@ -58,5 +58,5 @@
         </tr>
     @endforeach
     </table>
-        {{-- {{ $mahasiswas->links() }} --}}
+        {{ $paginate->links() }}
 @endsection
