@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
+use App\Models\Mahasiswa_MataKuliah;
 use Database\Seeders\KelasSeeder;
 
 class MahasiswaController extends Controller
@@ -17,15 +18,14 @@ class MahasiswaController extends Controller
      */
     public function index(Request $request)
     {
-        // $cari = $request->get('cari');
-        // if ($cari) {
-        //     $mahasiswas = Mahasiswa::where("Nama", "LIKE", "%$cari%")->paginate(5);
-        // } else {
-        //     $mahasiswas = Mahasiswa::paginate(5);
-        // }
-        $mahasiswas = Mahasiswa::with('kelas')->paginate(10);
-        // $kelas = Kelas::select('id', 'nama_kelas')->get();
-        $paginate = Mahasiswa::orderBy('Nim', 'asc')->paginate(3);
+        $cari = $request->get('cari');
+        if ($cari) {
+            $mahasiswas = Mahasiswa::with('kelas');
+            $paginate = Mahasiswa::orderBy('Nim', 'asc')->where("Nama", "LIKE", "%$cari%")->paginate(3);
+        } else {
+            $mahasiswas = Mahasiswa::with('kelas');
+            $paginate = Mahasiswa::orderBy('Nim', 'asc')->paginate(3);
+        }
         return view('mahasiswas.index', ['mahasiswas' => $mahasiswas, 'paginate' => $paginate]);
     }
 
@@ -141,5 +141,10 @@ class MahasiswaController extends Controller
         Mahasiswa::find($Nim)->delete();
         return redirect()->route('mahasiswas.index')
             ->with('success', 'Mahasiswa Berhasil Dihapus');
+    }
+    public function nilai($Nim)
+    {
+        $Mahasiswa = Mahasiswa::with('kelas', 'matakuliah')->find($Nim);
+        return view('mahasiswas.nilai', compact('Mahasiswa'));
     }
 }
