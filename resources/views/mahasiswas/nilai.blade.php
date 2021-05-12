@@ -35,7 +35,7 @@
     </table>
 
     <div class="float-right my-2">
-        <a class="btn btn-success mt-3" href="{{ route('mahasiswas.index') }}">Kembali</a>
+        <a class="btn btn-danger mt-3" href="{{ route('mahasiswas.cetak_pdf', $Mahasiswa->Nim) }}">Cetak ke PDF</a>
     </div>
 
 @endsection
